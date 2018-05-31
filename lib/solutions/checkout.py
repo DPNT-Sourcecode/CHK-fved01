@@ -79,9 +79,9 @@ def checkout(skus):
                         if 'limit' in FREE_OFFERS[product][offer][changeble]:
                             remaining = changes % FREE_OFFERS[product][offer][changeble]['limit']
                             if  remaining > 0:
-                                changes = frequences[product] / FREE_OFFERS[product][offer][changeble]['limit']
+                                changes = frequences[product] / offer
                             elif remaining == 0:
-                                changes = frequences[product] / FREE_OFFERS[product][offer][changeble]['limit'] - 1
+                                changes = frequences[product] / offer - 1
 
                         frequences[changeble] -= changes * FREE_OFFERS[product][offer][changeble]['quantity']
                         if frequences[changeble] < 0:
