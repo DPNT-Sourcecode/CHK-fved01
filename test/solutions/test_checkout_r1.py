@@ -30,7 +30,7 @@ class TestSum(unittest.TestCase):
 
     def test_checkout_7(self):
         result = checkout('aAAAbCBB')
-        self.assertEqual(result, 275)
+        self.assertEqual(result, -1)
 
     def test_checkout_8(self):
         result = checkout('')
