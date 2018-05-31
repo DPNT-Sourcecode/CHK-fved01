@@ -24,7 +24,7 @@ SPECIAL_OFFERS = {
 
 def _check_offers(product, freq, offer, offer_list):
     sum = 0
-    remaining = freq % SPECIAL_OFFERS[product][offer_list[offer]]
+    remaining = freq % offer_list[offer]
 
     if remaining < offer_list[-1]:
         sum += remaining * PRICES[product]
