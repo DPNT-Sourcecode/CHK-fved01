@@ -23,10 +23,16 @@ SPECIAL_OFFERS = {
 
 
 def checkout(skus):
+    if not isinstance(skus, str):
+        return -1
+
+    skus = skus.upper()
     sum = 0
     frequences = defaultdict(int)
 
     for product in skus:
+        if product not in PRICES:
+            return -1
         frequences[product] += 1
 
     for product, freq in frequences.items():

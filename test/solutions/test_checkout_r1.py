@@ -20,6 +20,17 @@ class TestSum(unittest.TestCase):
         result = checkout('AAAABCBB')
         self.assertEqual(result, 275)
 
+    def test_checkout_5(self):
+        result = checkout(12)
+        self.assertEqual(result, -1)
+
+    def test_checkout_6(self):
+        result = checkout('S')
+        self.assertEqual(result, -1)
+
+    def test_checkout_7(self):
+        result = checkout('aAAAbCBB')
+        self.assertEqual(result, 275)
 
 
 if __name__ == '__main__':
