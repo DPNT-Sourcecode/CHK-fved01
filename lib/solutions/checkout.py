@@ -22,7 +22,8 @@ SPECIAL_OFFERS = {
 }
 
 
-def _check_offers(product, freq, offer, offer_list, sum):
+def _check_offers(product, freq, offer, offer_list):
+    sum = 0
     remaining = freq % SPECIAL_OFFERS[product][offer_list[offer]]
 
     if remaining < offer_list[-1]:
@@ -52,13 +53,10 @@ def checkout(skus):
     for product, freq in frequences.items():
         if product in SPECIAL_OFFERS:
             offer_list = sorted(SPECIAL_OFFERS[product].keys(), reverse=True)
-            _check_offers(product, freq, 0, offer_list, sum)
+            sum += _check_offers(product, freq, 0, offer_list)
             continue
 
         sum += freq * PRICES[product]
-
-        import pdb;
-        pdb.set_trace()
 
     return sum
 
