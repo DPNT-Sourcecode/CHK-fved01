@@ -31,12 +31,10 @@ def _check_offers(product, freq, offer, offer_list):
         sum += _check_offers(product, freq, offer_list[offer + 1], offer_list)
 
     sum += (
-        (freq / SPECIAL_OFFERS[product]['quantity']) *
-        SPECIAL_OFFERS[product]['offer']
+        (freq / offer_list[offer]) * SPECIAL_OFFERS[product][offer_list[offer]]
     )
 
     return sum
-
 
 
 def checkout(skus):
