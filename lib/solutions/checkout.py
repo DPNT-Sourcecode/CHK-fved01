@@ -70,6 +70,9 @@ def checkout(skus):
     for product in frequences.keys():
         if product in FREE_OFFERS.keys():
             for offer in FREE_OFFERS[product].keys():
+                if frequences[product] < FREE_OFFERS[product][offer]['limit']:
+                    break
+
                 changes = frequences[product] / offer
                 for changeble in FREE_OFFERS[product][offer].keys():
                     frequences[changeble] -= changes * FREE_OFFERS[product][offer][changeble]
