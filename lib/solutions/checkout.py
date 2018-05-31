@@ -104,7 +104,8 @@ FREE_OFFERS = {
 }
 
 
-def _check_special_offers(product, freq, offer, offer_list):
+def _check_special_offers(offer_list, product, freq, offer=None):
+    offer = offer or 0
     sum = 0
     remaining = freq % offer_list[offer]
 
@@ -138,6 +139,7 @@ def checkout(skus):
             return -1
         frequencies[product] += 1
 
+    # Apply free offers
     for product in frequencies.keys():
         if product not in FREE_OFFERS.keys():
             continue
@@ -167,7 +169,7 @@ def checkout(skus):
     for product, freq in frequencies.items():
         if product in SPECIAL_OFFERS:
             offer_list = sorted(SPECIAL_OFFERS[product].keys(), reverse=True)
-            sum += _check_special_offers(product, freq, 0, offer_list)
+            sum += _check_special_offers(offer_list, product, freq)
             continue
 
         sum += freq * PRICES[product]
