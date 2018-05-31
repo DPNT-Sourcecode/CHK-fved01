@@ -9,6 +9,7 @@ PRICES = {
     'B': 30,
     'C': 20,
     'D': 15,
+    'E': 40,
 }
 
 SPECIAL_OFFERS = {
@@ -18,7 +19,15 @@ SPECIAL_OFFERS = {
     },
     'B': {
         2: 45,
-    }
+    },
+}
+
+FREE_OFFERS = {
+    'E': {
+        2: {
+            'B': 1
+        },
+    },
 }
 
 
@@ -49,6 +58,11 @@ def checkout(skus):
         if product not in PRICES:
             return -1
         frequences[product] += 1
+
+        if product in FREE_OFFERS.keys():
+            for offer in FREE_OFFERS[product].keys():
+                remaining = frequences[product] % offer
+
 
     for product, freq in frequences.items():
         if product in SPECIAL_OFFERS:
