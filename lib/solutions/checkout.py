@@ -1,4 +1,4 @@
-
+from collections import defaultdict
 
 # noinspection PyUnusedLocal
 # skus = unicode string
@@ -21,10 +21,14 @@ SPECIAL_OFFERS = {
 
 def checkout(skus):
     sum = 0
-    freq = {}
-    for product in skus:
+    freq = defaultdict(int)
 
-        # sum += PRICES[product]
+    for product in skus:
+        if product in freq:
+            freq[product] += 1
+
+    for sku in freq:
+        sum += PRICES[product]
 
     return sum
 
