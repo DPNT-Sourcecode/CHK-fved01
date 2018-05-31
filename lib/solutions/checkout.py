@@ -19,16 +19,17 @@ SPECIAL_OFFERS = {
     }
 }
 
+
 def checkout(skus):
     sum = 0
-    freq = defaultdict(int)
+    frequences = defaultdict(int)
 
     for product in skus:
-        if product in freq:
-            freq[product] += 1
+        if product in frequences:
+            frequences[product] += 1
 
-    for sku in freq:
-        sum += PRICES[product]
+    for sku, freq in frequences.items():
+        sum += PRICES[sku] * freq
 
     return sum
 
