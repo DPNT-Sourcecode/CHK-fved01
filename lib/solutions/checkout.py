@@ -53,10 +53,12 @@ def checkout(skus):
         if product in SPECIAL_OFFERS:
             offer_list = sorted(SPECIAL_OFFERS[product].keys(), reverse=True)
             sum += _check_offers(product, freq, 0, offer_list, sum)
-            import pdb; pdb.set_trace()
             continue
 
         sum += freq * PRICES[product]
+
+        import pdb;
+        pdb.set_trace()
 
     return sum
 
