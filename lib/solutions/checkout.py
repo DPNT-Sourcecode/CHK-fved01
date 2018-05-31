@@ -21,8 +21,10 @@ SPECIAL_OFFERS = {
 
 def checkout(skus):
     sum = 0
+    freq = {}
     for product in skus:
-        sum += PRICES[product]
+
+        # sum += PRICES[product]
 
     return sum
 
