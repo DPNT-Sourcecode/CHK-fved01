@@ -133,15 +133,21 @@ def checkout(skus):
     sum = 0
     frequencies = defaultdict(int)
 
-    # Copy identical special offers:
-    for key, value in IDENTICAL_SPECIAL_OFFERS.items():
-        for product in value:
-            SPECIAL_OFFERS[product] = SPECIAL_OFFERS[key].copy()
+    # # Copy identical special offers:
+    # for key, value in IDENTICAL_SPECIAL_OFFERS.items():
+    #     for product in value:
+    #         SPECIAL_OFFERS[product] = SPECIAL_OFFERS[key].copy()
 
     # Count frequencies of the products on the basket
     for product in skus:
         if product not in PRICES:
             return -1
+
+        for key, value in IDENTICAL_SPECIAL_OFFERS.items():
+            if product in value:
+                frequencies[key] += 1
+                continue
+
         frequencies[product] += 1
 
     # Apply free offers
