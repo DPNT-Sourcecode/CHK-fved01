@@ -93,7 +93,8 @@ FREE_OFFERS = {
     'U': {
         3: {
             'U': {
-                'quantity': 1
+                'quantity': 1,
+                'limit': 4,
             }
         }
     }
