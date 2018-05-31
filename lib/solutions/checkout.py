@@ -139,28 +139,30 @@ def checkout(skus):
         frequencies[product] += 1
 
     for product in frequencies.keys():
-        if product in FREE_OFFERS.keys():
-            for offer in FREE_OFFERS[product].keys():
-                changes = frequencies[product] / offer
-                if changes:
-                    for changable in FREE_OFFERS[product][offer].keys():
-                        if 'limit' in FREE_OFFERS[product][offer][changable]:
-                            remaining = (
-                                changes %
-                                FREE_OFFERS[product][offer][changable]['limit'])
-                            if remaining > 0:
-                                changes = (
-                                    frequencies[product] /
-                                    FREE_OFFERS[product][offer][changable][
-                                        'limit'])
-                            elif remaining == 0:
-                                changes -= 1
+        if product not in FREE_OFFERS.keys():
+            continue
 
-                        frequencies[changable] -= (
-                            changes * FREE_OFFERS[product][offer][changable][
-                                'quantity'])
-                        if frequencies[changable] < 0:
-                            frequencies[changable] = 0
+        for offer in FREE_OFFERS[product].keys():
+            changes = frequencies[product] / offer
+            if not changes:
+                continue
+
+            for changable in FREE_OFFERS[product][offer].keys():
+                if 'limit' in FREE_OFFERS[product][offer][changable]:
+                    remaining = (
+                        changes % FREE_OFFERS[product][offer][changable]['limit'])
+
+                    if remaining > 0:
+                        changes = (
+                            frequencies[product] / FREE_OFFERS[product][offer][changable]['limit'])
+                    elif remaining == 0:
+                        changes -= 1
+
+                frequencies[changable] -= (
+                    changes * FREE_OFFERS[product][offer][changable]['quantity'])
+
+                if frequencies[changable] < 0:
+                    frequencies[changable] = 0
 
     for product, freq in frequencies.items():
         if product in SPECIAL_OFFERS:
@@ -171,5 +173,3 @@ def checkout(skus):
         sum += freq * PRICES[product]
 
     return sum
-
-
