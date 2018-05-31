@@ -28,7 +28,7 @@ def _check_offers(product, freq, offer, offer_list):
 
     if remaining < offer_list[-1]:
         sum += remaining * PRICES[product]
-    else:
+    elif len(offer_list) :
         sum += _check_offers(product, freq, offer_list[offer + 1], offer_list)
 
     sum += (
