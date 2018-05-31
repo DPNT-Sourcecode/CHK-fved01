@@ -26,6 +26,7 @@ def _check_offers(product, freq, offer, offer_list, sum):
     remaining = freq % SPECIAL_OFFERS[product][offer_list[offer]]
 
     if remaining < offer_list[-1]:
+        import pdb; pdb.set_trace()
         sum += remaining * PRICES[product]
     else:
         sum += _check_offers(product, freq, offer_list[offer + 1], offer_list)
