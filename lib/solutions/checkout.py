@@ -151,7 +151,8 @@ def checkout(skus):
 
     # Copy identical special offers:
     for key, value in IDENTICAL_SPECIAL_OFFERS.items():
-
+        for product in value:
+            SPECIAL_OFFERS[product] = SPECIAL_OFFERS[key].copy()
 
     # Count frequencies of the products on the basket
     for product in skus:
