@@ -68,6 +68,8 @@ def checkout(skus):
                     if frequences[changeble] < 0:
                         frequences[changeble] = 0
 
+                frequences[product] -=
+
     for product, freq in frequences.items():
         if product in SPECIAL_OFFERS:
             offer_list = sorted(SPECIAL_OFFERS[product].keys(), reverse=True)
