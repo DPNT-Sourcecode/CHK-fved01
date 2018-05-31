@@ -26,12 +26,14 @@ SPECIAL_OFFERS = {
 FREE_OFFERS = {
     'E': {
         2: {
-            'B': 1
+            'B': 1,
+            'limit': 2,
         },
     },
     'F': {
         2: {
             'F': 1,
+            'limit': 3,
         },
     },
 }
