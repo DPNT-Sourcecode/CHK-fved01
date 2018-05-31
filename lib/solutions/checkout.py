@@ -5,26 +5,25 @@ from collections import defaultdict
 # skus = unicode string
 
 PRICES = {
-    u'A': 50,
-    u'B': 30,
-    u'C': 20,
-    u'D': 15,
+    'A': 50,
+    'B': 30,
+    'C': 20,
+    'D': 15,
 }
 
 SPECIAL_OFFERS = {
-    u'A': {
-        u'quantity': 3,
-        u'offer': 130,
+    'A': {
+        'quantity': 3,
+        'offer': 130,
     },
-    u'B': {
-        u'quantity': 2,
-        u'offer': 45,
+    'B': {
+        'quantity': 2,
+        'offer': 45,
     }
 }
 
 
 def checkout(skus):
-    print type(skus)
     if not isinstance(skus, str) and not isinstance(skus, unicode):
         return -1
 
@@ -39,11 +38,11 @@ def checkout(skus):
 
     for product, freq in frequences.items():
         if product in SPECIAL_OFFERS:
-            remaining = freq % SPECIAL_OFFERS[product][u'quantity']
+            remaining = freq % SPECIAL_OFFERS[product]['quantity']
             sum += remaining * PRICES[product]
             sum += (
-                (freq / SPECIAL_OFFERS[product][u'quantity']) *
-                SPECIAL_OFFERS[product][u'offer']
+                (freq / SPECIAL_OFFERS[product]['quantity']) *
+                SPECIAL_OFFERS[product]['offer']
             )
             continue
 

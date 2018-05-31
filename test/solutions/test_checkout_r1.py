@@ -37,6 +37,10 @@ class TestSum(unittest.TestCase):
         self.assertEqual(result, 0)
 
     def test_checkout_9(self):
+        result = checkout('A')
+        self.assertEqual(result, 50)
+
+    def test_checkout_10(self):
         result = checkout(u'A')
         self.assertEqual(result, 50)
 
