@@ -143,10 +143,10 @@ def checkout(skus):
         if product not in PRICES:
             return -1
 
-        for key, value in IDENTICAL_SPECIAL_OFFERS.items():
-            if product in value:
-                frequencies[key] += 1
-                continue
+        # for key, value in IDENTICAL_SPECIAL_OFFERS.items():
+        #     if product in value:
+        #         frequencies[key] += 1
+        #         continue
 
         frequencies[product] += 1
 
