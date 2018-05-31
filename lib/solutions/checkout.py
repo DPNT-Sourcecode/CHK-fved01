@@ -56,7 +56,11 @@ SPECIAL_OFFERS = {
     },
     'S': {
         3: 45,
-    }
+    },
+}
+
+INTENTICAL_OFFERS = {
+    'S': ['T', 'X', 'Y', 'Z']
 }
 
 FREE_OFFERS = {
@@ -155,7 +159,7 @@ def checkout(skus):
         _check_free_offers(frequencies, product)
 
     for product, freq in frequencies.items():
-        if product in SPECIAL_OFFERS:
+        if product in SPECIAL_OFFERS or product in [x for key, value in INTENTICAL_OFFERS.items()]:
             offer_list = sorted(SPECIAL_OFFERS[product].keys(), reverse=True)
             sum += _check_special_offers(product, freq, 0, offer_list)
             continue
