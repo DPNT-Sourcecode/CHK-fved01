@@ -157,12 +157,10 @@ def checkout(skus):
                                 changes -= 1
 
                         frequencies[changable] -= (
-                            changes * FREE_OFFERS[product][offer][changeble][
+                            changes * FREE_OFFERS[product][offer][changable][
                                 'quantity'])
                         if frequencies[changable] < 0:
                             frequencies[changable] = 0
-
-
 
     for product, freq in frequencies.items():
         if product in SPECIAL_OFFERS:
