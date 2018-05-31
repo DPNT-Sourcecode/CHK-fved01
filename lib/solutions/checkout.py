@@ -27,10 +27,7 @@ def checkout(skus):
     frequences = defaultdict(int)
 
     for product in skus:
-        if product in frequences.keys():
-            frequences[product] += 1
-
-    print frequences
+        frequences[product] += 1
 
     for product, freq in frequences.items():
         if product in SPECIAL_OFFERS:
