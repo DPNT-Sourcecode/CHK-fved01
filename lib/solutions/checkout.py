@@ -59,7 +59,7 @@ SPECIAL_OFFERS = {
     },
 }
 
-INTENTICAL_SPECIAL_OFFERS = {
+IDENTICAL_SPECIAL_OFFERS = {
     'S': ['T', 'X', 'Y', 'Z']
 }
 
@@ -149,6 +149,10 @@ def checkout(skus):
     sum = 0
     frequencies = defaultdict(int)
 
+    # Copy identical special offers:
+    for key, value in IDENTICAL_SPECIAL_OFFERS.items():
+
+
     # Count frequencies of the products on the basket
     for product in skus:
         if product not in PRICES:
@@ -159,8 +163,7 @@ def checkout(skus):
         _check_free_offers(frequencies, product)
 
     for product, freq in frequencies.items():
-        identical_special_offers = [item for key, value in INTENTICAL_OFFERS.items() for item in value]
-        if product in SPECIAL_OFFERS or product in :
+        if product in SPECIAL_OFFERS:
             offer_list = sorted(SPECIAL_OFFERS[product].keys(), reverse=True)
             sum += _check_special_offers(product, freq, 0, offer_list)
             continue
