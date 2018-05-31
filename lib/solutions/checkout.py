@@ -33,8 +33,14 @@ def checkout(skus):
     for product, freq in frequences.items():
         if product in SPECIAL_OFFERS:
             remaining = freq % SPECIAL_OFFERS[product]['quantity']
-        if freq %
-        sum += PRICES[sku] * freq
+            sum += remaining * PRICES[product]
+            sum += (
+                (freq / SPECIAL_OFFERS[product]['quantity']) *
+                SPECIAL_OFFERS[product]['offer']
+            )
+            continue
+
+        sum += freq * PRICES[product]
 
     return sum
 
