@@ -107,8 +107,8 @@ FREE_OFFERS = {
 def _check_special_offers(product, freq, offer_list, offer=None):
     offer = offer or 0
     sum = 0
-    offer_price
-    remaining = freq % offer_list[offer]
+    offer_quantity = offer_list[offer]
+    remaining = freq % offer_quantity
 
     if remaining < offer_list[-1]:
         sum += remaining * PRICES[product]
@@ -116,7 +116,7 @@ def _check_special_offers(product, freq, offer_list, offer=None):
         sum += _check_special_offers(product, remaining, offer_list, offer + 1)
 
     sum += (
-        (freq / offer_list[offer]) * SPECIAL_OFFERS[product][offer_list[offer]]
+        (freq / offer_quantity) * SPECIAL_OFFERS[product][offer_quantity]
     )
 
     return sum
