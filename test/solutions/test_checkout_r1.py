@@ -48,6 +48,10 @@ class TestSum(unittest.TestCase):
         result = checkout('EEEBB')
         self.assertEqual(result, 150)
 
+    def test_checkout_12(self):
+        result = checkout('FF')
+        self.assertEqual(result, 10)
+
 
 if __name__ == '__main__':
     unittest.main()
