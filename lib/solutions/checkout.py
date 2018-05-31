@@ -24,7 +24,8 @@ SPECIAL_OFFERS = {
 
 
 def checkout(skus):
-    if not isinstance(skus, str):
+    print type(skus)
+    if not isinstance(skus, str) and not isinstance(skus, unicode):
         return -1
 
     skus = skus.upper()

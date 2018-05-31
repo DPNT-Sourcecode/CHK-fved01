@@ -37,7 +37,7 @@ class TestSum(unittest.TestCase):
         self.assertEqual(result, 0)
 
     def test_checkout_9(self):
-        result = checkout('A')
+        result = checkout(u'A')
         self.assertEqual(result, 50)
 
 
