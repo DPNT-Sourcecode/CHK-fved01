@@ -22,6 +22,23 @@ SPECIAL_OFFERS = {
 }
 
 
+def _check_offers(product, freq, offer, offer_list):
+    remaining = freq % SPECIAL_OFFERS[product][offer_list[offer]]
+
+    if remaining < offer_list[-1]:
+        sum += remaining * PRICES[product]
+    else:
+        sum += _check_offers(product, freq, offer_list[offer + 1], offer_list)
+
+    sum += (
+        (freq / SPECIAL_OFFERS[product]['quantity']) *
+        SPECIAL_OFFERS[product]['offer']
+    )
+
+    return sum
+
+
+
 def checkout(skus):
     if not isinstance(skus, str) and not isinstance(skus, unicode):
         return -1
@@ -37,12 +54,7 @@ def checkout(skus):
     for product, freq in frequences.items():
         if product in SPECIAL_OFFERS:
             offer_list = sorted(SPECIAL_OFFERS[product].keys(), reverse=True)
-            remaining = freq % SPECIAL_OFFERS[product]['quantity']
-            sum += remaining * PRICES[product]
-            sum += (
-                (freq / SPECIAL_OFFERS[product]['quantity']) *
-                SPECIAL_OFFERS[product]['offer']
-            )
+            sum += _check_offers(product, freq, 0, offer_list)
             continue
 
         sum += freq * PRICES[product]
