@@ -13,12 +13,11 @@ PRICES = {
 
 SPECIAL_OFFERS = {
     'A': {
-        'quantity': 3,
-        'offer': 130,
+        3: 130,
+        5: 200,
     },
     'B': {
-        'quantity': 2,
-        'offer': 45,
+        2: 45,
     }
 }
 
@@ -37,6 +36,7 @@ def checkout(skus):
 
     for product, freq in frequences.items():
         if product in SPECIAL_OFFERS:
+            offer_list = sorted(SPECIAL_OFFERS[product].keys(), reverse=True)
             remaining = freq % SPECIAL_OFFERS[product]['quantity']
             sum += remaining * PRICES[product]
             sum += (
