@@ -101,14 +101,14 @@ FREE_OFFERS = {
 }
 
 
-def _check_offers(product, freq, offer, offer_list):
+def _check_special_offers(product, freq, offer, offer_list):
     sum = 0
     remaining = freq % offer_list[offer]
 
     if remaining < offer_list[-1]:
         sum += remaining * PRICES[product]
     elif offer + 1 < len(offer_list):
-        sum += _check_offers(product, remaining, offer + 1, offer_list)
+        sum += _check_special_offers(product, remaining, offer + 1, offer_list)
 
     sum += (
         (freq / offer_list[offer]) * SPECIAL_OFFERS[product][offer_list[offer]]
@@ -117,39 +117,50 @@ def _check_offers(product, freq, offer, offer_list):
     return sum
 
 
+def _check_free_offers(frequencies, product):
+    if product in FREE_OFFERS.keys():
+        for offer in FREE_OFFERS[product].keys():
+            changes = frequencies[product] / offer
+            if changes:
+                for changeble in FREE_OFFERS[product][offer].keys():
+                    if 'limit' in FREE_OFFERS[product][offer][changeble]:
+                        remaining = changes % \
+                                    FREE_OFFERS[product][offer][changeble][
+                                        'limit']
+                        if remaining > 0:
+                            changes = frequencies[product] / \
+                                      FREE_OFFERS[product][offer][changeble][
+                                          'limit']
+                        elif remaining == 0:
+                            changes -= 1
+
+                    frequencies[changeble] -= changes * \
+                                              FREE_OFFERS[product][offer][
+                                                  changeble]['quantity']
+                    if frequencies[changeble] < 0:
+                        frequencies[changeble] = 0
+
+
 def checkout(skus):
     if not isinstance(skus, str) and not isinstance(skus, unicode):
         return -1
 
     sum = 0
-    frequences = defaultdict(int)
+    frequencies = defaultdict(int)
 
+    # Count frequencies of the products on the basket
     for product in skus:
         if product not in PRICES:
             return -1
-        frequences[product] += 1
+        frequencies[product] += 1
 
-    for product in frequences.keys():
-        if product in FREE_OFFERS.keys():
-            for offer in FREE_OFFERS[product].keys():
-                changes = frequences[product] / offer
-                if changes:
-                    for changeble in FREE_OFFERS[product][offer].keys():
-                        if 'limit' in FREE_OFFERS[product][offer][changeble]:
-                            remaining = changes % FREE_OFFERS[product][offer][changeble]['limit']
-                            if remaining > 0:
-                                changes = frequences[product] / FREE_OFFERS[product][offer][changeble]['limit']
-                            elif remaining == 0:
-                                changes -= 1
+    for product in frequencies.keys():
+        _check_free_offers(frequencies, product)
 
-                        frequences[changeble] -= changes * FREE_OFFERS[product][offer][changeble]['quantity']
-                        if frequences[changeble] < 0:
-                            frequences[changeble] = 0
-
-    for product, freq in frequences.items():
+    for product, freq in frequencies.items():
         if product in SPECIAL_OFFERS:
             offer_list = sorted(SPECIAL_OFFERS[product].keys(), reverse=True)
-            sum += _check_offers(product, freq, 0, offer_list)
+            sum += _check_special_offers(product, freq, 0, offer_list)
             continue
 
         sum += freq * PRICES[product]
