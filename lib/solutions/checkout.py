@@ -26,14 +26,18 @@ SPECIAL_OFFERS = {
 FREE_OFFERS = {
     'E': {
         2: {
-            'B': 1,
-            'limit': 2,
+            'B': {
+                'quantity': 1,
+                'limit': 2,
+            },
         },
     },
     'F': {
         2: {
-            'F': 1,
-            'limit': 3,
+            'F': {
+                'quantity': 1,
+                'limit': 3,
+            },
         },
     },
 }
@@ -70,12 +74,12 @@ def checkout(skus):
     for product in frequences.keys():
         if product in FREE_OFFERS.keys():
             for offer in FREE_OFFERS[product].keys():
-                if frequences[product] < FREE_OFFERS[product][offer]['limit']:
-                    break
-
                 changes = frequences[product] / offer
                 for changeble in FREE_OFFERS[product][offer].keys():
-                    frequences[changeble] -= changes * FREE_OFFERS[product][offer][changeble]
+                    if frequences[product] < FREE_OFFERS[product][offer][changeble]['limit']:
+                        break
+
+                    frequences[changeble] -= changes * FREE_OFFERS[product][offer][changeble]['quantity']
                     if frequences[changeble] < 0:
                         frequences[changeble] = 0
 
