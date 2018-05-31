@@ -120,7 +120,6 @@ def _check_special_offers(product, freq, offer, offer_list):
     return sum
 
 
-# TODO: Still not unittestable
 def _check_free_offers(frequencies, product):
     if product in FREE_OFFERS.keys():
         for offer in FREE_OFFERS[product].keys():
