@@ -136,14 +136,17 @@ def checkout(skus):
 
     # Count frequencies of the products on the basket
     for product in skus:
-        identical_offer_found = False
         if product not in PRICES:
             return -1
 
+        identical_offer_found = False
         for identical_offer in IDENTICAL_SPECIAL_OFFERS:
             if product in identical_offer:
+                identical_offer_found = True
                 identical_frequencies[identical_offer].append(product)
 
+        if identical_offer_found:
+            continue
 
         frequencies[product] += 1
 
