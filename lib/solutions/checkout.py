@@ -63,7 +63,7 @@ SPECIAL_OFFERS = {
     },
 }
 
-IDENTICAL_SPECIAL_OFFERS = [
+MULTI_SPECIAL_OFFERS = [
     ('S', 'STXYZ'),
 ]
 
@@ -132,15 +132,15 @@ def checkout(skus):
 
     sum = 0
     frequencies = defaultdict(int)
-    identical_frequencies = defaultdict(list)
+    multi_special_offer_frequencies = defaultdict(list)
 
     # Count frequencies of the products on the basket
     for product in skus:
         if product not in PRICES:
             return -1
 
-        identical_offer_found = False
-        for identical_offer in IDENTICAL_SPECIAL_OFFERS:
+        multi_special_offer_found = False
+        for identical_offer in MULTI_SPECIAL_OFFERS :
             if product in identical_offer:
                 identical_offer_found = True
                 identical_frequencies[identical_offer].append(product)
