@@ -150,10 +150,11 @@ def checkout(skus):
 
         frequencies[product] += 1
 
-    import pdb; pdb.set_trace()
     # Process identical offers
-    # for identical_freq in identical_frequencies:
-    #     remaining = len(identical_freq) %
+    for group_offer_key, group_offer_freq in group_frequencies.items():
+        offer_list = sorted(SPECIAL_OFFERS[group_offer_key].keys(), reverse=True)
+        for offer in offer_list
+        remaining = len(group_offer_freq) % SPECIAL_OFFERS[group_offer_key]
 
     # Apply free offers
     for product in frequencies.keys():
