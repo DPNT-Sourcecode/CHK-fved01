@@ -161,7 +161,8 @@ def checkout(skus):
             changes = len(group_offer_freq) / offer
 
             frequencies[group_offer_key] += changes * offer
-            if counter + 1 < len(offer_list) and remaining > offer_list[counter + 1]:
+            if (counter + 1 < len(offer_list) and
+                        remaining > offer_list[counter + 1]):
                 continue
 
             # Arghh it seems that we need to keep the cheapest ones
