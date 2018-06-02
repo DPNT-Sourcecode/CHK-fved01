@@ -80,13 +80,25 @@ class TestSum(unittest.TestCase):
         result = checkout('SSSS')
         self.assertEqual(result, 65)
 
-    def test_checkout_21(self):
-        result = checkout('STXS')
+    # def test_checkout_21(self):
+    #     result = checkout('STXS')
+    #     self.assertEqual(result, 65)
+    #
+    # def test_checkout_22(self):
+    #     result = checkout('STXZ')
+    #     self.assertEqual(result, 66)
+
+    def test_checkout_23(self):
+        result = checkout('SSSZ')
         self.assertEqual(result, 65)
 
-    def test_checkout_22(self):
+    def test_checkout_24(self):
+        result = checkout('STXS')
+        self.assertEqual(result, 62)
+
+    def test_checkout_25(self):
         result = checkout('STXZ')
-        self.assertEqual(result, 66)
+        self.assertEqual(result, 62)
 
 
 if __name__ == '__main__':

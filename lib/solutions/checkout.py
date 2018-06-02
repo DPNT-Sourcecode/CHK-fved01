@@ -161,6 +161,11 @@ def checkout(skus):
             if counter + 1 < len(offer_list) and remaining > offer_list[counter + 1]:
                 continue
 
+            # Arghh it seems that we need to keep the cheapest ones
+            # instead of the last items
+            sorted_group_offer_freq = sorted(group_offer_freq, key=lambda x: PRICES['x'])
+            import pdb;
+            pdb.set_trace()
             for i in range(remaining):
                 frequencies[group_offer_freq[-(i + 1)]] += 1
 
