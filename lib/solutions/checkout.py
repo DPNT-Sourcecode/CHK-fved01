@@ -64,7 +64,7 @@ SPECIAL_OFFERS = {
 }
 
 IDENTICAL_SPECIAL_OFFERS = [
-    'STXYZ',
+    ('S', 'STXYZ'),
 ]
 
 FREE_OFFERS = {
@@ -150,7 +150,9 @@ def checkout(skus):
 
         frequencies[product] += 1
 
-    import pdb; pdb.set_trace()
+    # Process identical offers
+    for identical_freq in identical_frequencies:
+        remaining = len(identical_freq) %
 
     # Apply free offers
     for product in frequencies.keys():
