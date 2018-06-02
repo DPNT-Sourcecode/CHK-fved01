@@ -140,13 +140,14 @@ def checkout(skus):
         if product not in PRICES:
             return -1
 
+        # Use secondary dictionary to keep track the multi offer products
         group_offer_found = False
         for group_offer_key, group_offer_products in GROUP_OFFERS:
             if product in group_offer_products:
                 group_offer_found = True
                 group_frequencies[group_offer_key].append(product)
 
-        if group_offer_found :
+        if group_offer_found:
             continue
 
         frequencies[product] += 1
