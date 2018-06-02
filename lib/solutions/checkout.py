@@ -157,8 +157,9 @@ def checkout(skus):
             remaining = len(group_offer_freq) % offer
             changes = len(group_offer_freq) / offer
 
-            frequencies[group_offer_freq] += changes * offer
-            if remaining
+            frequencies[group_offer_key] += changes * offer
+            if counter + 1 < len(offer_list) and remaining > offer_list[counter + 1]:
+                continue
 
             for i in range(remaining):
                 frequencies[group_offer_freq[-(i + 1)]] += 1
