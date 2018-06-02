@@ -63,9 +63,9 @@ SPECIAL_OFFERS = {
     },
 }
 
-IDENTICAL_SPECIAL_OFFERS = {
-    'S': ['T', 'X', 'Y', 'Z']
-}
+IDENTICAL_SPECIAL_OFFERS = [
+    'STXYZ',
+]
 
 FREE_OFFERS = {
     'E': {
@@ -132,23 +132,22 @@ def checkout(skus):
 
     sum = 0
     frequencies = defaultdict(int)
-
-    # # Copy identical special offers:
-    # for key, value in IDENTICAL_SPECIAL_OFFERS.items():
-    #     for product in value:
-    #         SPECIAL_OFFERS[product] = SPECIAL_OFFERS[key].copy()
+    identical_frequencies = defaultdict(list)
 
     # Count frequencies of the products on the basket
     for product in skus:
+        identical_offer_found = False
         if product not in PRICES:
             return -1
 
-        # for key, value in IDENTICAL_SPECIAL_OFFERS.items():
-        #     if product in value:
-        #         frequencies[key] += 1
-        #         continue
+        for identical_offer in IDENTICAL_SPECIAL_OFFERS:
+            if product in identical_offer:
+                identical_frequencies[identical_offer].append(product)
+
 
         frequencies[product] += 1
+
+    import pdb; pdb.set_trace()
 
     # Apply free offers
     for product in frequencies.keys():
