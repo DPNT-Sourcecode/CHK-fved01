@@ -89,7 +89,5 @@ class TestSum(unittest.TestCase):
         self.assertEqual(result, 66)
 
 
-
-
 if __name__ == '__main__':
     unittest.main()

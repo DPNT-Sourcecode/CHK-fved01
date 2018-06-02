@@ -150,7 +150,7 @@ def checkout(skus):
 
         frequencies[product] += 1
 
-    # Process identical offers
+    # Process grouped offers
     for group_offer_key, group_offer_freq in group_frequencies.items():
         offer_list = sorted(SPECIAL_OFFERS[group_offer_key].keys(), reverse=True)
         for counter, offer in enumerate(offer_list):
@@ -163,7 +163,6 @@ def checkout(skus):
 
             for i in range(remaining):
                 frequencies[group_offer_freq[-(i + 1)]] += 1
-
 
     # Apply free offers
     for product in frequencies.keys():
