@@ -163,11 +163,12 @@ def checkout(skus):
 
             # Arghh it seems that we need to keep the cheapest ones
             # instead of the last items
-            sorted_group_offer_freq = sorted(group_offer_freq, key=lambda x: PRICES['x'])
-            import pdb;
-            pdb.set_trace()
+            sorted_group_offer_freq = sorted(
+                group_offer_freq,
+                key=lambda x: PRICES[x],
+            )
             for i in range(remaining):
-                frequencies[group_offer_freq[-(i + 1)]] += 1
+                frequencies[sorted_group_offer_freq[i + 1]] += 1
 
     # Apply free offers
     for product in frequencies.keys():
