@@ -159,7 +159,7 @@ def checkout(skus):
 
             frequencies[group_offer_freq] += changes * offer
             for i in range(remaining):
-                group_offer_freq[len(group_offer_freq) - (i + 1)]
+                frequencies[group_offer_freq[-(i + 1)]] += 1
 
 
     # Apply free offers
