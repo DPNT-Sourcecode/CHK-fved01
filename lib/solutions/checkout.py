@@ -63,7 +63,7 @@ SPECIAL_OFFERS = {
     },
 }
 
-MULTI_SPECIAL_OFFERS = [
+GROUP_OFFERS = [
     ('S', 'STXYZ'),
 ]
 
@@ -132,27 +132,28 @@ def checkout(skus):
 
     sum = 0
     frequencies = defaultdict(int)
-    multi_special_offer_frequencies = defaultdict(list)
+    group_frequencies = defaultdict(list)
 
     # Count frequencies of the products on the basket
     for product in skus:
         if product not in PRICES:
             return -1
 
-        multi_special_offer_found = False
-        for identical_offer in MULTI_SPECIAL_OFFERS :
-            if product in identical_offer:
-                identical_offer_found = True
-                identical_frequencies[identical_offer].append(product)
+        group_offer_found = False
+        for group_offer_key, group_offer_products in GROUP_OFFERS:
+            if product in group_offer_products:
+                group_offer_found = True
+                group_frequencies[group_offer_key].append(product)
 
-        if identical_offer_found:
+        if group_offer_found :
             continue
 
         frequencies[product] += 1
 
+    import pdb; pdb.set_trace()
     # Process identical offers
-    for identical_freq in identical_frequencies:
-        remaining = len(identical_freq) %
+    # for identical_freq in identical_frequencies:
+    #     remaining = len(identical_freq) %
 
     # Apply free offers
     for product in frequencies.keys():
